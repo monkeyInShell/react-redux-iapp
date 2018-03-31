@@ -1,0 +1,18 @@
+{
+  "verbose": true,
+  "ignore": [
+    ".git",
+    "node_modules/",
+    ".idea",
+    "client/",
+    "./webpack.*.js"
+  ],
+  "execMap": {
+  },
+  "env": {
+    "LOCAL_ENV": "local_env"
+  },
+  "watch": [
+    "server/"
+  ]
+}
