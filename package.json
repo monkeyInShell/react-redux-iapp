@@ -5,7 +5,7 @@
     "start": "cross-env NODE_ENV=development nodemon ./bin/www.js --exec babel-node",
     "prebuild": "babel bin --out-dir dist/bin && babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "postbuild": "babel public --out-dir dist/public --copy-files"
+    "postbuild": "babel public --out-dir dist/public --copy-files && babel test --out-dir dist/test --copy-files"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
