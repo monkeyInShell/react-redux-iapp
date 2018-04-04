@@ -10,7 +10,7 @@
   "execMap": {
   },
   "env": {
-    "LOCAL_ENV": "local_env"
+    "NODE_ENV": "local"
   },
   "watch": [
     "server/"

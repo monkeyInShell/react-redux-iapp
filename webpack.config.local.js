@@ -4,28 +4,42 @@
 const path = require('path')
 const webpack = require('webpack')
 const contentPath = path.resolve(__dirname, 'public')
+const publicPath = '/'
+const ManifestPlugin = require('webpack-manifest-plugin')
 const config = {
   mode: 'development',
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
   entry: {
-    index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true', './client/index.js']
+    'components/index': ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true', './client/pages/example/index.js']
   },
+  target: 'web',
   output: {
     path: contentPath,
-    publicPath: '/',
-    filename: '[name].js',
-    chunkFilename: '[name].js',
+    publicPath,
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[hash].js',
     libraryTarget: 'umd'
   },
   module: {
     rules: [{
+      enforce: 'pre',
+      test: '/\.jsx?$/',
+      exclude: /node_modules/,
+      use: ['eslint-loader']
+    }, {
       test: /\.jsx?$/,
       use: ['babel-loader']
+    }, {
+      test: /\.less$/,
+      use: ['style-loader', 'css-loader', 'less-loader']
+    }, {
+      test: /\.(png|jpg|gif)$/,
+      use: ['url-loader']
     }]
   },
   resolve: {
     modules: [
-      "node_modules",
+      'node_modules',
       path.resolve(__dirname, 'client'),
       path.resolve(__dirname, 'server')
     ]
@@ -42,7 +56,7 @@ const config = {
     disableHostCheck: true,
     contentBase: [contentPath],
     historyApiFallback: true,
-    stats: "minimal"
+    stats: 'minimal'
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
@@ -50,12 +64,9 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
-    //new HtmlWebpackPlugin({
-    //  title: '服务端渲染',
-    //  filename: `${contentPath}/ssr.html`,
-    //  template: './server/views/index.hbs',
-    //  chunks: ['index']
-    //})
+    new ManifestPlugin({
+      fileName: 'mapping.json'
+    }),
   ]
 }
 module.exports = config

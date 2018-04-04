@@ -1,0 +1,80 @@
+@import "../common/less/reset";
+.top-nav {
+  font-size: 16px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0px 16px;
+}
+@media only screen and ( max-width: 1080px ) {
+  .top-nav {
+    justify-content: center;
+  }
+  .bd{
+    margin: 24px 0 24px 0;
+    .wrap{
+      .sider{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+    }
+  }
+}
+@media only screen and ( min-width: 1081px ) {
+  .top-nav {
+    justify-content: flex-start;
+  }
+  .bd{
+    margin: 24px 48px 24px 48px;
+    .wrap{
+      .sider{
+        height: 100%;
+        float: left;
+        width: 200px;
+        padding: 15px 0;
+      }
+    }
+  }
+}
+.bd{
+  .code-source{
+    color: #108ee9;
+    font-size: 14px;
+    padding-left: 100px;
+    margin-top: 30px;
+  }
+  font-size: 14px;
+  line-height: 1.5;
+  .wrap{
+    height: 100%;
+    background-color: #ffffff;
+    .sider{
+      li.top-component{
+        padding: 0 15px;
+        &.active{
+          color: #108ee9;
+          background-color: #ecf6fd;
+        }
+        font-size: 16px;
+        a{
+          display: block;
+          padding: 10px 0px;
+        }
+      }
+    }
+    .content{
+      overflow: hidden;
+      min-height: 500px;
+      border-left: 1px solid #d9d9d9;
+      padding-bottom: 24px;
+      background-color: #ffffff;
+    }
+  }
+
+}
+

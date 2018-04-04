@@ -4,33 +4,45 @@
 import express from 'express'
 import {renderToString} from 'react-dom/server'
 import path from 'path'
-import App from '../client/App'
+import App from '../client/pages/example/App'
 import React from 'react'
+import extractMapping from './middleware/extractMapping'
+import mapAssets from './utils/mapAssets'
+import {StaticRouter} from 'react-router'
 const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs')
 app.use(express.static(path.resolve(__dirname, '../public')))
 
-if (process.env.NODE_ENV === 'development') {
-  const config = require('../webpack.config.dev')
+if (process.env.NODE_ENV === 'local') {
+  const config = require('../webpack.config.local')
   const webpack = require('webpack')
   const compiler = webpack(config)
   const webpackDevMiddleware = require('webpack-dev-middleware')
   const webpackHotMiddleware = require('webpack-hot-middleware')
+  app.use(webpackHotMiddleware(compiler, {
+    log: false,
+    path: '/__webpack_hmr',
+    heartbeat: 2000
+  }))
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     serverSideRender: true
   }))
-  app.use(webpackHotMiddleware(compiler, {
-    log: false,
-    path: "/__webpack_hmr",
-    heartbeat: 2000
-  }))
 }
-app.use((req, res, next) => {
-  const content = renderToString(<App/>)
-  res.render('index', {
-    app: content
+
+//组件页面
+app.use('/components', extractMapping, (req, res, next) => {
+  const content = renderToString(<StaticRouter
+    location={req.url}
+    context={{}}
+    basename="/components">
+    <App/>
+  </StaticRouter>)
+  res.render('components', {
+    app: content,
+    links: mapAssets('components/index.css'),
+    scripts: mapAssets('components/index.js')
   })
 })
 export default app

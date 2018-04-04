@@ -1,4 +1,4 @@
-const devConfig = require("./webpack.config.dev")
+const devConfig = require("./webpack.config.local")
 const proConfig = require("./webpack.config.pro")
 const NODE_ENV = process.env.NODE_ENV
 let config
