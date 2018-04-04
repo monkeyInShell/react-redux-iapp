@@ -21,7 +21,6 @@ const extractMapping = (req, res, next) => {
     }
   }
   global.staticAssetsMapping = mapping
-  console.log(JSON.stringify(global.staticAssetsMapping))
   next()
 }
 

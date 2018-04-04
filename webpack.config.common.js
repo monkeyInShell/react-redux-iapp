@@ -2,29 +2,38 @@
  * Created by ink on 2018/4/4.
  */
 const path = require('path')
-let contentPath, publicPath, entry
-entry = {
+const ManifestPlugin = require('webpack-manifest-plugin')
+//这里可以路径前一个名称作为页面区分
+const entry = {
   'components/index': ['./client/pages/example/index.js']
 }
-if (process.env.NODE_ENV === 'local') {
-  contentPath = path.resolve(__dirname, 'public')
-  publicPath = '/'
-  Object.keys(entry).forEach((item, index) => {
-    entry[item].unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true')
+const rules = [{
+  enforce: 'pre',
+  test: '/\.jsx?$/',
+  exclude: /node_modules/,
+  use: ['eslint-loader']
+}, {
+  test: /\.jsx?$/,
+  use: ['babel-loader']
+}, {
+  test: /\.(png|jpg|gif)$/,
+  use: ['url-loader']
+}]
+const plugins = [
+  new ManifestPlugin({
+    fileName: 'mapping.json'
   })
-} else {
-  contentPath = path.resolve(__dirname, 'dist/public/mapping')
-  publicPath = '/mapping/'
-}
+]
 const config = {
   entry,
   target: 'web',
   output: {
-    path: contentPath,
-    publicPath,
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
     libraryTarget: 'umd'
+  },
+  module: {
+    rules
   },
   resolve: {
     modules: [
@@ -33,5 +42,6 @@ const config = {
       path.resolve(__dirname, 'server')
     ]
   },
+  plugins,
 }
 module.exports = config

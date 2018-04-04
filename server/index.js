@@ -31,8 +31,10 @@ if (process.env.NODE_ENV === 'local') {
   }))
 }
 
-//组件页面
+//以路径名称作为页面区分
+
 app.use('/components', extractMapping, (req, res, next) => {
+  //可以根据路径，针对某一个页面进行服务端渲染
   const content = renderToString(<StaticRouter
     location={req.url}
     context={{}}
