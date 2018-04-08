@@ -11,53 +11,53 @@ import PullRefresh from './PullRefresh'
 import Slide from './Slide'
 import Staff from './Staff'
 import UploadMore from './UploadMore'
+const routeConfig = [{
+  path: '/dashboard',
+  component: Dashboard,
+  title: '仪表盘'
+}, {
+  path: '/imgupload',
+  component: ImgUpload,
+  title: '图片上传'
+}, {
+  path: '/itemmove',
+  component: ItemMove,
+  title: '列表项可滑动'
+}, {
+  path: '/pullrefresh',
+  component: PullRefresh,
+  title: '下拉刷新'
+}, {
+  path: '/slide',
+  component: Slide,
+  title: '幻灯片'
+}, {
+  path: '/staff',
+  component: Staff,
+  title: '画布标尺'
+}, {
+  path: '/uploadmore',
+  component: UploadMore,
+  title: '上拉加载更多'
+}]
+const liCollection = []
+const routes = []
+for (let i = 0; i < routeConfig.length; i++) {
+  const item = routeConfig[i]
+  liCollection.push(<li key={item.path} className={`top-component flag${item.path.replace('/', '-')}`}>
+    <Link to={item.path}>
+      {item.title}
+    </Link>
+  </li>)
+  routes.push(<Route key={item.path} path={item.path} component={item.component}/>)
+}
 const App = (props) => {
   return (<div className="wrap">
     <ul className="sider">
-      <li className="top-component flag-dashboard">
-        <Link to="/dashboard">
-          仪表盘
-        </Link>
-      </li>
-      <li className="top-component flag-imgupload">
-        <Link to="/imgupload">
-          图片上传
-        </Link>
-      </li>
-      <li className="top-component flag-itemmove">
-        <Link to="/itemmove">
-          列表项可滑动
-        </Link>
-      </li>
-      <li className="top-component flag-pullrefresh">
-        <Link to="/pullrefresh">
-          下拉刷新
-        </Link>
-      </li>
-      <li className="top-component flag-slide">
-        <Link to="/slide">
-          幻灯片
-        </Link>
-      </li>
-      <li className="top-component flag-staff">
-        <Link to="/staff">
-          画布标尺
-        </Link>
-      </li>
-      <li className="top-component flag-uploadmore">
-        <Link to="/uploadmore">
-          上拉加载更多
-        </Link>
-      </li>
+      {liCollection}
     </ul>
     <div className="content">
-      <Route path="/dashboard" component={Dashboard}/>
-      <Route path="/imgupload" component={ImgUpload}/>
-      <Route path="/itemmove" component={ItemMove}/>
-      <Route path="/pullrefresh" component={PullRefresh}/>
-      <Route path="/slide" component={Slide}/>
-      <Route path="/staff" component={Staff}/>
-      <Route path="/uploadmore" component={UploadMore}/>
+      {routes}
     </div>
   </div>)
 }

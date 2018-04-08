@@ -5,7 +5,8 @@ const path = require('path')
 const ManifestPlugin = require('webpack-manifest-plugin')
 //这里可以路径前一个名称作为页面区分
 const entry = {
-  'components/index': ['./client/pages/example/index.js']
+  'components/index': ['./client/pages/example/index.js'],
+  'integration/index': ['./client/pages/integration/index.js']
 }
 const rules = [{
   enforce: 'pre',

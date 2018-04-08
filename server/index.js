@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === 'local') {
 //以路径名称作为页面区分
 
 app.use('/components', extractMapping, (req, res, next) => {
+  console.log(req.url)
   //可以根据路径，针对某一个页面进行服务端渲染
   const content = renderToString(<StaticRouter
     location={req.url}
@@ -45,6 +46,12 @@ app.use('/components', extractMapping, (req, res, next) => {
     app: content,
     links: mapAssets('components/index.css'),
     scripts: mapAssets('components/index.js')
+  })
+})
+app.use('/integration', extractMapping, (req, res, next) => {
+  res.render('integration', {
+    links: mapAssets('integration/index.css'),
+    scripts: mapAssets('integration/index.js')
   })
 })
 export default app
