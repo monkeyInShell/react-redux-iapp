@@ -6,9 +6,9 @@ import {Provider} from 'react-redux'
 import React from 'react'
 let ContentEnv
 if (process.env.NODE_ENV === 'local') {
-  ContentEnv = require('./Root.local')
+  ContentEnv = require('./Local')
 } else {
-  ContentEnv = require('./Root.prod')
+  ContentEnv = require('./Prod')
 }
 const RealContent = ContentEnv.default
 const Root = (props) => {

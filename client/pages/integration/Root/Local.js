@@ -3,7 +3,7 @@
  */
 
 import React, {Fragment} from 'react'
-import DevTools from '../DevTools/index'
+import DevTools from '../../tools/DevTools/index'
 const Content = (props) => {
   const {component: CustomerContent} = props
   return (<Fragment>

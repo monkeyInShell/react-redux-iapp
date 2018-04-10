@@ -7,16 +7,16 @@ import path from 'path'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 
-import App from '../client/pages/example/App'
+import Component from '../client/pages/example/App'
 import extractMapping from './middleware/extractMapping'
 import mapAssets from './utils/mapAssets'
 import {StaticRouter} from 'react-router'
 
 import {Provider} from 'react-redux'
-import store from '../client/pages/integration/store/forServer'
-import {Content} from '../client/pages/integration/container/Root'
+import store from '../client/pages/tools/store/forServer'
+import {Content} from '../client/pages/integration/Root/index'
 import Integration from '../client/pages/integration/App'
-
+import reducers from '../client/pages/integration/store/'
 const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs')
@@ -46,7 +46,7 @@ app.use('/components', extractMapping, (req, res, next) => {
     location={req.url}
     context={{}}
     basename="/components">
-    <App/>
+    <Component/>
   </StaticRouter>)
   res.render('components', {
     app: content,
@@ -56,7 +56,7 @@ app.use('/components', extractMapping, (req, res, next) => {
 })
 
 app.use('/integration', extractMapping, (req, res, next) => {
-  const content = renderToString(<Provider store={store}>
+  const content = renderToString(<Provider store={store(reducers)}>
     <StaticRouter
       location={req.url}
       context={{}}

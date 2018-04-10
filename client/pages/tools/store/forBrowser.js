@@ -1,7 +1,7 @@
 /**
  * Created by ink on 2018/4/10.
  */
-import {reducers, middleware} from './common'
+import {middleware} from './common'
 import {routerMiddleware} from 'react-router-redux'
 import {applyMiddleware, combineReducers} from 'redux'
 import {createBrowserHistory} from 'history'
@@ -12,10 +12,12 @@ const history = createBrowserHistory({
 
 const middlewares = middleware.concat(routerMiddleware(history))
 
-const store = configureStore(
-  combineReducers(reducers),
-  {},
-  applyMiddleware(...middlewares)
-)
+const store = reducers => {
+  return configureStore(
+    combineReducers(reducers),
+    {},
+    applyMiddleware(...middlewares)
+  )
+}
 export {history}
 export default store
