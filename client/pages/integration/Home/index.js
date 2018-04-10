@@ -8,13 +8,13 @@ import * as actions from '../redux/action'
 class Home extends Component {
   constructor(options) {
     super(options)
-    console.log(this.props)
+    console.log(this.props.title)
   }
   componentDidMount() {
     setTimeout(() => {
-      //this.props.actions.home('我是首页')
+      this.props.actions.home('我是首页')
       //通过action出发路由跳转
-      this.props.actions.jump('center')
+      //this.props.actions.jump('center')
     }, 2000)
   }
   render() {

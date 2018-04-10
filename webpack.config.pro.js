@@ -7,8 +7,7 @@ const contentPath = path.resolve(__dirname, 'dist/public/mapping')
 const ExtractCssChunks = require('extract-text-webpack-plugin')
 const publicPath = '/mapping/'
 const commonConfig = require('./webpack.config.common')
-console.log('读取production')
-console.log(`入口数组：${JSON.stringify(commonConfig.entry)}`)
+console.log('读取webpack production')
 const config = {
   mode: 'production',
   devtool: 'source-map',

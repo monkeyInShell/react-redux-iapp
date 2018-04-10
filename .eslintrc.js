@@ -135,7 +135,7 @@ module.exports = {
     "no-template-curly-in-string": "error",
     "no-this-before-super": "error",
     "no-throw-literal": "error",
-    "no-trailing-spaces": "error",
+    "no-trailing-spaces": 1,
     "no-undef": "error",
     "no-undef-init": "error",
     "no-unexpected-multiline": "error",

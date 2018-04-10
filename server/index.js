@@ -2,13 +2,21 @@
  * Created by ink on 2018/3/29.
  */
 import express from 'express'
-import {renderToString} from 'react-dom/server'
 import path from 'path'
-import App from '../client/pages/example/App'
+
 import React from 'react'
+import {renderToString} from 'react-dom/server'
+
+import App from '../client/pages/example/App'
 import extractMapping from './middleware/extractMapping'
 import mapAssets from './utils/mapAssets'
 import {StaticRouter} from 'react-router'
+
+import {Provider} from 'react-redux'
+import store from '../client/pages/integration/store/forServer'
+import {Content} from '../client/pages/integration/container/Root'
+import Integration from '../client/pages/integration/App'
+
 const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs')
@@ -32,9 +40,7 @@ if (process.env.NODE_ENV === 'local') {
 }
 
 //以路径名称作为页面区分
-
 app.use('/components', extractMapping, (req, res, next) => {
-  console.log(req.url)
   //可以根据路径，针对某一个页面进行服务端渲染
   const content = renderToString(<StaticRouter
     location={req.url}
@@ -48,8 +54,19 @@ app.use('/components', extractMapping, (req, res, next) => {
     scripts: mapAssets('components/index.js')
   })
 })
+
 app.use('/integration', extractMapping, (req, res, next) => {
+  const content = renderToString(<Provider store={store}>
+    <StaticRouter
+      location={req.url}
+      context={{}}
+      basename="/integration"
+    >
+      <Content component={Integration}/>
+    </StaticRouter>
+  </Provider>)
   res.render('integration', {
+    app: content,
     links: mapAssets('integration/index.css'),
     scripts: mapAssets('integration/index.js')
   })

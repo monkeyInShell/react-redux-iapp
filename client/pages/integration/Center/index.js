@@ -8,7 +8,6 @@ import React, {Component} from 'react'
 
 class Center extends Component {
   render () {
-    console.log(this.props)
     return (<div>欢迎来到个人中心</div>)
   }
 }

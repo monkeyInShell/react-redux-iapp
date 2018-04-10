@@ -13,7 +13,7 @@ Object.keys(copyEntry).map(item => {
   temp.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true')
   entry[item] = temp
 })
-console.log('读取devConfig')
+console.log('读取webpack devConfig')
 const config = {
   mode: 'development',
   devtool: 'eval-source-map',
@@ -48,7 +48,7 @@ const config = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify('local')
     }),
     ...commonConfig.plugins
   ]
