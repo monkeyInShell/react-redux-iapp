@@ -4,7 +4,7 @@
 import React from 'react'
 import Hoc from '../hoc/Hoc'
 import './index.less'
-import UploadMore from '../../../components/UploadMore'
+import UploadMore from '../../../Components/UploadMore'
 class Index extends Hoc {
   constructor (options) {
     super(options)

@@ -2,6 +2,8 @@
  * Created by ink on 2018/3/31.
  */
 if (process.env.NODE_ENV === 'local') {
+  //node运行时生效,同样也会去读.babelrc，plugins不会覆盖，会concat生效
+  //webpack生效的配置是.babelrc
   require('babel-register')({
     'plugins': [
       [
@@ -9,7 +11,8 @@ if (process.env.NODE_ENV === 'local') {
         {
           extensions: ['.less']
         }
-      ]
+      ],
+      'dynamic-import-node'
     ]
   })
 }
