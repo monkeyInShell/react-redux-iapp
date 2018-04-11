@@ -2,10 +2,12 @@
  * Created by ink on 2018/4/8.
  */
 import React, {Fragment} from 'react'
-import Center from './Center'
-import Home from './Home'
+import Loading from './Components/Loading'
 import {Switch, Route, Link} from 'react-router-dom'
-
+import load from '../tools/lazyLoad/'
+const lazyLoad = load('integration/', Loading)
+const Home = lazyLoad('Home')
+const Center = lazyLoad('Center')
 const App = (props) => {
   return (
     <Fragment>

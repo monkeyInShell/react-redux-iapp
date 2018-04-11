@@ -2,7 +2,7 @@
  * Created by zhouyunkui on 2017/6/9.
  */
 import React from 'react';
-import {Slide, SlideItem, } from '../../../components/Slide';
+import {Slide, SlideItem, } from '../../../Components/Slide';
 import Hoc from '../hoc/Hoc';
 import './index.less';
 class Index extends Hoc {

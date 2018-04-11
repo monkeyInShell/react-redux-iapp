@@ -1,5 +1,6 @@
 {
-  "presets": [["env", {
+  "presets": [
+    ["env", {
     "targets": {
       "browsers": ["last 2 versions", "safari >= 7"],
       "node": "8.9.3"
@@ -7,7 +8,7 @@
   }], "react"],
   "plugins": [
     "transform-class-properties", //解析类属性，静态和实例的属性
-    "syntax-dynamic-import"//不解析动态加载标识符 import()
+    "syntax-dynamic-import"//不解析动态加载标识符 import() node环境无作用，得另想办法
   ],
   "env": {
     "node": {
@@ -16,7 +17,7 @@
         {
           "extensions": [".less", ".sass"]
         }
-      ]]
+      ], "dynamic-import-node"]
     }
   }
 }

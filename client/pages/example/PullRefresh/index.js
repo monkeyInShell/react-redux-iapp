@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Hoc from '../hoc/Hoc';
-import PullRefresh from '../../../components/PullRefresh';
+import PullRefresh from '../../../Components/PullRefresh';
 import './index.less';
 class Index extends Hoc {
   constructor (options) {
