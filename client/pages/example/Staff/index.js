@@ -4,7 +4,7 @@
 import React from 'react'
 import './index.less'
 import Hoc from '../hoc/Hoc'
-import Staff from '../../../components/Staff'
+import Staff from '../../../Components/Staff'
 class Index extends Hoc {
   constructor (options) {
     super(options)

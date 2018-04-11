@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import './index.less';
-import ItemMove from '../../../components/ItemMove';
+import ItemMove from '../../../Components/ItemMove';
 import Hoc from '../hoc/Hoc';
 class Index extends Hoc {
   constructor (options) {

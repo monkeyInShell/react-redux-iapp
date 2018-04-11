@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Hoc from '../hoc/Hoc';
-import Dashboard from '../../../components/Dashboard';
+import Dashboard from '../../../Components/Dashboard';
 import './index.less';
 class Index extends Hoc {
   constructor (options) {

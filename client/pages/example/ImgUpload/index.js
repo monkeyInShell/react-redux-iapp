@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import Hoc from '../hoc/Hoc';
-import ImgUpload from '../../../components/ImgUpload';
+import ImgUpload from '../../../Components/ImgUpload';
 import './index.less';
 class Index extends Hoc {
   constructor (options) {
