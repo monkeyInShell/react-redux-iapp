@@ -10,9 +10,8 @@ const historyConf = (options) => {
   return createBrowserHistory(options)
 }
 
-const middlewares = middleware.concat(routerMiddleware(history))
-
-const store = reducers => {
+const store = (reducers, history) => {
+  const middlewares = middleware.concat(routerMiddleware(history))
   return configureStore(
     combineReducers(reducers),
     {},
