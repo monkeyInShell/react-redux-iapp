@@ -6,9 +6,9 @@ import {routerMiddleware} from 'react-router-redux'
 import {applyMiddleware, combineReducers} from 'redux'
 import {createBrowserHistory} from 'history'
 import configureStore from '../configure/store'
-const history = createBrowserHistory({
-  basename: '/integration'
-})
+const historyConf = (options) => {
+  return createBrowserHistory(options)
+}
 
 const middlewares = middleware.concat(routerMiddleware(history))
 
@@ -19,5 +19,5 @@ const store = reducers => {
     applyMiddleware(...middlewares)
   )
 }
-export {history}
+export {historyConf}
 export default store
