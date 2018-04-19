@@ -15,6 +15,7 @@ const rules = [{
   use: ['eslint-loader']
 }, {
   test: /\.jsx?$/,
+  exclude: /node_modules/,
   use: ['babel-loader']
 }, {
   test: /\.(png|jpg|gif)$/,
