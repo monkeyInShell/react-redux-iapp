@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "fix": "sh ./eslint.sh",
-    "start": "nodemon ./bin/www.js",
+    "start": "nodemon ./bin/www",
     "clean": "sh ./clean.sh",
     "prebuild": "npm run clean && babel bin --out-dir dist/bin &&cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
