@@ -3,24 +3,11 @@
  */
 import express from 'express'
 import path from 'path'
-
-import React from 'react'
-import {renderToString} from 'react-dom/server'
-
-import Component from '../client/pages/example/App'
-import extractMapping from './middleware/extractMapping'
-import mapAssets from './utils/mapAssets'
-import {StaticRouter} from 'react-router'
-
-import {Provider} from 'react-redux'
-import store from '../client/pages/tools/store/forServer'
-import {Content} from '../client/pages/integration/Root/index'
-import Integration from '../client/pages/integration/App'
-import reducers from '../client/pages/integration/store/'
+import pages from './routes/pages'
 const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs')
-app.use(express.static(path.resolve(__dirname, '../public')))
+app.get(express.static(path.resolve(__dirname, '../public')))
 
 if (process.env.NODE_ENV === 'local') {
   const config = require('../webpack.config.local')
@@ -38,37 +25,18 @@ if (process.env.NODE_ENV === 'local') {
     serverSideRender: true
   }))
 }
-
-//以路径名称作为页面区分
-app.use('/Components', extractMapping, (req, res, next) => {
-  //可以根据路径，针对某一个页面进行服务端渲染
-  const content = renderToString(<StaticRouter
-    location={req.url}
-    context={{}}
-    basename="/components">
-    <Component/>
-  </StaticRouter>)
-  res.render('components', {
-    app: content,
-    links: mapAssets('components/index.css'),
-    scripts: mapAssets('components/index.js')
+//页面链式路由入口
+app.use('/p', pages)
+//首页
+app.get('/', (req, res) => {
+  res.render('homepage', {
+    title: 'react-redux-iapp同构项目'
   })
 })
-
-app.use('/integration', extractMapping, (req, res, next) => {
-  const content = renderToString(<Provider store={store(reducers)}>
-    <StaticRouter
-      location={req.url}
-      context={{}}
-      basename="/integration"
-    >
-      <Content component={Integration}/>
-    </StaticRouter>
-  </Provider>)
-  res.render('integration', {
-    app: content,
-    links: mapAssets('integration/index.css'),
-    scripts: mapAssets('integration/index.js')
+app.use((req, res, next, err) => {
+  res.json({
+    message: '404',
+    err: err
   })
 })
 export default app

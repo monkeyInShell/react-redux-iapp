@@ -12,7 +12,7 @@ const App = (props) => {
   return (
     <Fragment>
       <div>
-        <Link to='/home'>首页</Link>
+        <Link to='/home'>个人主页</Link>
       </div>
       <div>
         <Link to='/center'>用户中心</Link>

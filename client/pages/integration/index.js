@@ -8,7 +8,7 @@ import App from './App'
 import storeFactory, {historyConf} from '../tools/store/forBrowser'
 import reducers from './store/'
 const history = historyConf({
-  basename: '/integration'
+  basename: '/p/integration'
 })
 const store = storeFactory(reducers, history)
 
