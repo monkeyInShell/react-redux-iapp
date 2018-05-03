@@ -7,7 +7,7 @@ import connect from '../../tools/connect'
 
 class Center extends Component {
   render () {
-    return (<div>欢迎来到个人中心</div>)
+    return (<div>{this.props.title}</div>)
   }
 }
 export default connect({
