@@ -1,8 +1,8 @@
-# server-side-render
-## for development
-> npm run start
-## for production
-> npm run build
-### start production server
+# 服务端渲染同构框架
 
-> node bin/www.js
+## 本地开发
+> npm run start
+
+## 生产打包
+> npm run build
+

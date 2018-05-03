@@ -11,6 +11,7 @@
     "syntax-dynamic-import"//不解析动态加载标识符 import() node环境无作用，得另想办法
   ],
   "env": {
+    //这个配置只针对服务端的客户端代码
     "node": {
       "plugins": [[
         "babel-plugin-transform-require-ignore",

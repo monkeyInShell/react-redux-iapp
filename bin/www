@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 if (process.env.NODE_ENV === 'local') {
-  //node运行时生效,同样也会去读.babelrc，plugins不会覆盖，会concat生效
-  //webpack生效的配置是.babelrc
+  //由于运行时不会设置BABEL_ENV = node，单独为node运行时设置插件处理
+  //这里如果统一设置BABEL_ENV = node，导致webpack内babel运行时也会去读取env: node的配置
   require('babel-register')({
     'plugins': [
       [
