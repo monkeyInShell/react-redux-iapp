@@ -22,9 +22,10 @@ router.get('/', (req, res) => {
 })
 
 router.get('/integration(/:page)?', extractMapping, (req, res, next) => {
+  const location = `${req.baseUrl}${req.path}`
   const content = renderToString(<Provider store={store(reducers)}>
     <StaticRouter
-      location={req.originalUrl}
+      location={location}
       context={{}}
       basename="/p/integration"
     >
@@ -40,8 +41,9 @@ router.get('/integration(/:page)?', extractMapping, (req, res, next) => {
 
 router.get('/components(/:page)?', extractMapping, (req, res, next) => {
   //可以根据路径，针对某一个页面进行服务端渲染
+  const location = `${req.baseUrl}${req.path}`
   const content = renderToString(<StaticRouter
-    location={req.originalUrl}
+    location={location}
     context={{}}
     basename="/p/components">
     <Component/>
