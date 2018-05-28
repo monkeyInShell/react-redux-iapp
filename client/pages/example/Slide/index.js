@@ -30,7 +30,7 @@ class Index extends Hoc {
       <div>
         <p>这是一个水平滚动slide实例</p>
         <div style={style}>
-          <Slide layout={'horizontal'} defaultActiveIndex={0} className={''} style={{}} slideFeedback={false} preSlide={function ({activeIndex}) {
+          <Slide layout='horizontal' defaultActiveIndex={0} className={''} style={{}} slideFeedback={false} preSlide={function ({activeIndex}) {
             console.log('滑动开始:当前的slide序号', activeIndex)
           }} afterSlide={function ({activeIndex}) {
             console.log('滑动结束:当前的slide序号', activeIndex);

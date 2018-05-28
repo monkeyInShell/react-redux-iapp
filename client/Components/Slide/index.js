@@ -2,10 +2,10 @@
  * Created by zhouyunkui on 2017/6/9.
  */
 /* eslint-disable */
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './Slide.less';
-import { preventDocMove, offPreventDefault, } from '../../pages/example/common/js/preventDocMove';
+import {preventDocMove, offPreventDefault, } from '../../pages/example/common/js/preventDocMove';
 const VERTICAL = 'vertical',
   HORIZONTAL = 'horizontal';
 export class Slide extends Component {
@@ -38,20 +38,20 @@ export class Slide extends Component {
   }
   constructor(options){
     super(options);
-    const { children, defaultActiveIndex, activeIndex, width, height, } = this.props;
+    const {children, defaultActiveIndex, activeIndex, width, height, } = this.props;
     const count = React.Children.count( children );
     this.state = {
       transform: - ( defaultActiveIndex * width ),
-      transition: 'transition',
-      region: this.progressRegion( { width, count } ),
+      transition: false,
+      region: this.progressRegion( {width, count } ),
       activeIndex: activeIndex ,
       width: width,
       height: height,
     }
   }
   getSlidePane = () => {
-    const { children } = this.props;
-    const { width, height } = this.state;
+    const {children } = this.props;
+    const {width, height } = this.state;
     return React.Children.map( children , (child) => {
       if( !child ) return;
       const order = parseInt(child.props.order, 10);
@@ -69,8 +69,8 @@ export class Slide extends Component {
    * @returns {boolean}
    */
   slideFeedbackSwitch = ( direction ) => {
-    const { slideFeedback, children, } = this.props;
-    const { activeIndex } = this.state;
+    const {slideFeedback, children, } = this.props;
+    const {activeIndex } = this.state;
     const count = React.Children.count( children );
     if ( !slideFeedback ) {
       if ( direction === -1 ) {
@@ -88,8 +88,8 @@ export class Slide extends Component {
     return true;
   }
   whenSlideReachFeedbackTransformLimit = ( transformDistance ) => {
-    const { region } = this.state;
-    const { slideFeedbackTransformLimit, slideFeedback, } = this.props;
+    const {region } = this.state;
+    const {slideFeedbackTransformLimit, slideFeedback, } = this.props;
     const first = region[0];
     const last = region[region.length-1];
     const howFarFromBeginToCurrent = transformDistance - first,
@@ -112,9 +112,9 @@ export class Slide extends Component {
     return finalTransformDistance;
   }
   start = ( event ) => {
-    const { preSlide } = this.props;
-    const { activeIndex } = this.state;
-    preSlide ? preSlide( { activeIndex, } ) : '';
+    const {preSlide } = this.props;
+    const {activeIndex } = this.state;
+    preSlide ? preSlide( {activeIndex, } ) : '';
     this.startX = event.changedTouches[0].clientX;
     this.startY = event.changedTouches[0].clientY;
     this.switchRate = undefined;
@@ -122,7 +122,7 @@ export class Slide extends Component {
     this.cacheTransform = this.state.transform;
   }
   move = ( event ) => {
-    const { layout } = this.props;
+    const {layout } = this.props;
     this.moveX = event.changedTouches[0].clientX;
     this.moveY = event.changedTouches[0].clientY;
     let currentMove;
@@ -145,14 +145,14 @@ export class Slide extends Component {
       let transformDistance = this.whenSlideReachFeedbackTransformLimit( this.cacheTransform + currentMove );
       this.setState({
         transform: transformDistance,
-        transition: ''
+        transition: false
       })
     }
   }
   end = ( event ) => {
     this.preventDocMove = false;
-    const { afterSlide, layout, } = this.props;
-    const { transform, } = this.state;
+    const {afterSlide, layout, } = this.props;
+    const {transform, } = this.state;
     this.endX = event.changedTouches[0].clientX;
     this.endY = event.changedTouches[0].clientY
     let distance;
@@ -162,16 +162,16 @@ export class Slide extends Component {
       distance = this.endY - this.startY;
     }
     const direction = distance > 0 ? 1 : ( distance < 0 ? -1 : 0 );
-    const { transform: newTransform, index: activeIndex}= this.onlySlideInRegion( direction );
+    const {transform: newTransform, index: activeIndex}= this.onlySlideInRegion( direction );
     this.setState( {
       transform: newTransform,
-      transition: 'transition',
+      transition: true,
       activeIndex: activeIndex
     },() => {
-      afterSlide ? afterSlide( { activeIndex, } ) : '';
+      afterSlide ? afterSlide( {activeIndex, } ) : '';
     })
   }
-  binaryChop = ( { region, target, direction } ) => {
+  binaryChop = ( {region, target, direction } ) => {
     //此处region由大到小排列
     let left = 0,
       right = region.length - 1,
@@ -216,7 +216,7 @@ export class Slide extends Component {
           //手指向右滑动
           distance = target - region[result[1]];
         }
-        const { transformLimit } = this.props;
+        const {transformLimit } = this.props;
         if ( distance >= transformLimit ) {
           if ( direction === -1 ) {
             return {
@@ -258,8 +258,8 @@ export class Slide extends Component {
     }
   }
   onlySlideInRegion = ( direction ) => {
-    const { region, transform: target } = this.state;
-    return this.binaryChop( { region, target, direction } );
+    const {region, transform: target } = this.state;
+    return this.binaryChop( {region, target, direction } );
   }
   progressRegion = ({size, count}) => {
     const region = [];
@@ -277,7 +277,7 @@ export class Slide extends Component {
   //获取元素宽度和高度，因为css中对Slide中的包裹元素设置了width和height都是100%。经历两次render
   getLayout = ( instance ) => {
     if ( !instance ) return;
-    const { children, layout, defaultActiveIndex, } = this.props;
+    const {children, layout, defaultActiveIndex, } = this.props;
     const count = React.Children.count( children );
     const width = instance.offsetWidth,
       height = instance.offsetHeight;
@@ -285,31 +285,31 @@ export class Slide extends Component {
     this.setState( {
       width,
       height,
-      region: this.progressRegion( { size, count } ),
-      transform: - ( defaultActiveIndex * size ),
+      region: this.progressRegion( {size, count } ),
+      transform: - ( defaultActiveIndex * size )
     })
   }
   componentDidMount() {
-    preventDocMove.call( this );
+    preventDocMove.call(this);
   }
   componentWillUnmount() {
-    offPreventDefault.call( this );
+    offPreventDefault.call(this);
   }
   render() {
     console.log('Slide')
-    const { children, style, className, layout, } = this.props;
-    const { width, height, transition, transform, } = this.state;
+    const {children, style, className, layout, } = this.props;
+    const {width, height, transition, transform, } = this.state;
     const count = React.Children.count(children);
     const styleOfSlideCollection = {
-      width: `${ layout === HORIZONTAL ? width * count: width }px`,
-      height: `${ layout === HORIZONTAL ? height : height * count }px`,
-      transform: `translate${ layout === HORIZONTAL ? 'X' : 'Y' }(${ transform }px)`,
-      WebkitTransform: `translate${ layout === HORIZONTAL ? 'X' :'Y' }(${ transform }px)`,
-      transition: `${ transition ? 'transform .6s cubic-bezier(.53,.54,.02,.99)' : ''}`,
-      WebkitTransition: `${ transition ? '-webkit-transform .6s cubic-bezier(.53,.54,.02,.99)' : ''}`
+      width: `${layout === HORIZONTAL ? width * count: width }px`,
+      height: `${layout === HORIZONTAL ? height : height * count }px`,
+      transform: `translate${layout === HORIZONTAL ? 'X' : 'Y' }(${transform }px)`,
+      WebkitTransform: `translate${layout === HORIZONTAL ? 'X' :'Y' }(${transform }px)`,
+      transition: `${transition ? 'transform .6s cubic-bezier(.53,.54,.02,.99)' : ''}`,
+      WebkitTransition: `${transition ? '-webkit-transform .6s cubic-bezier(.53,.54,.02,.99)' : ''}`
     };
     const wrapClassName = `slide-wrap ${className}`;
-    return <div ref={ this.getLayout } className={ wrapClassName } style={ style }>
+    return <div ref={this.getLayout } className={wrapClassName } style={style }>
       <div
         className={`slide-collection`}
         style={styleOfSlideCollection}
@@ -340,14 +340,14 @@ export class SlideItem extends Component {
   }
   render(){
     console.log('SlideItem')
-    const { width, height, style, className, children, } = this.props;
+    const {width, height, style, className, children, } = this.props;
     const styleOfSlidePane = Object.assign( {}, style, {
       width: `${width}px`,
       height: `${height}px`,
     })
     const sectionClassName = `slide-item ${className}`;
     return <section className={sectionClassName} style={styleOfSlidePane}>
-      { children }
+      {children }
     </section>
   }
 }
