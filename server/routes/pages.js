@@ -1,57 +1,19 @@
 /**
  * Created by ink on 2018/5/3.
  */
-
-import React from 'react'
-import {renderToString} from 'react-dom/server'
-import Component from '../../client/pages/example/App'
 import extractMapping from '../middleware/extractMapping'
-import mapAssets from '../utils/mapAssets'
-import {StaticRouter} from 'react-router'
-
-import {Provider} from 'react-redux'
-import store from '../../client/pages/tools/store/forServer'
-import {Content} from '../../client/pages/integration/Root/index'
-import Integration from '../../client/pages/integration/App'
-import reducers from '../../client/pages/integration/store/'
 import express from 'express'
+
+import integrationController from '../controller/integration'
+import componentsController from '../controller/components'
 const router = express.Router()
 
 router.get('/', (req, res) => {
   res.status(301).set('Location', '/').end()
 })
 
-router.get('/integration(/:page)?', extractMapping, (req, res, next) => {
-  const location = `${req.baseUrl}${req.path}`
-  const content = renderToString(<Provider store={store(reducers)}>
-    <StaticRouter
-      location={location}
-      context={{}}
-      basename="/p/integration"
-    >
-      <Content component={Integration}/>
-    </StaticRouter>
-  </Provider>)
-  res.render('integration', {
-    app: content,
-    links: mapAssets('integration/index.css'),
-    scripts: mapAssets('integration/index.js')
-  })
-})
+router.use('/integration', extractMapping, integrationController.router)
 
-router.get('/components(/:page)?', extractMapping, (req, res, next) => {
-  //可以根据路径，针对某一个页面进行服务端渲染
-  const location = `${req.baseUrl}${req.path}`
-  const content = renderToString(<StaticRouter
-    location={location}
-    context={{}}
-    basename="/p/components">
-    <Component/>
-  </StaticRouter>)
-  res.render('components', {
-    app: content,
-    links: mapAssets('components/index.css'),
-    scripts: mapAssets('components/index.js')
-  })
-})
+router.use('/components', extractMapping, componentsController.router)
+
 export default router

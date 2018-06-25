@@ -11,7 +11,7 @@ require('babel-register')({
   ]
 })
 const injectDevelopmentTools = (app) => {
-  const config = require('../../webpack.config.local')
+  const config = require('../../webpack.config.dev.babel')
   const webpack = require('webpack')
   const compiler = webpack(config)
   const webpackDevMiddleware = require('webpack-dev-middleware')

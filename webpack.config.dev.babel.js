@@ -4,7 +4,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const contentPath = path.resolve(__dirname, 'public')
-const commonConfig = require('./webpack.config.common')
+const commonConfig = require('./webpack.config.common.babel')
 const publicPath = '/'
 const copyEntry = Object.assign({}, commonConfig.entry)
 const entry = {}
@@ -13,7 +13,7 @@ Object.keys(copyEntry).map(item => {
   temp.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true')
   entry[item] = temp
 })
-console.log('读取webpack devConfig')
+console.log('读取webpack.config.dev.babel.js')
 const config = {
   mode: 'development',
   devtool: 'eval-source-map',

@@ -10,7 +10,7 @@ const entry = {
 }
 const rules = [{
   enforce: 'pre',
-  test: '/\.jsx?$/',
+  test: /\.jsx?$/,
   exclude: /node_modules/,
   use: ['eslint-loader']
 }, {

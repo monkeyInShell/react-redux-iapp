@@ -7,7 +7,7 @@ const contentPath = path.resolve(__dirname, 'dist/public/mapping')
 //extract-text-webpack-plugin 还是beta版有bug，不同入口的css内容都一样
 const ExtractCssChunks = require('extract-text-webpack-plugin')
 const publicPath = '/mapping/'
-const commonConfig = require('./webpack.config.common')
+const commonConfig = require('./webpack.config.common.babel')
 console.log('读取webpack production')
 const config = {
   mode: 'production',
