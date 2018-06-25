@@ -42,7 +42,8 @@ const config = {
     disableHostCheck: true,
     contentBase: [contentPath],
     historyApiFallback: true,
-    stats: 'minimal'
+    stats: 'minimal',
+    compress: true
   },
   plugins: [
     new webpack.NamedModulesPlugin(),

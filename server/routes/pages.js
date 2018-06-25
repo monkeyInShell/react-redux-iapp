@@ -1,8 +1,8 @@
 /**
  * Created by ink on 2018/5/3.
  */
-import extractMapping from '../middleware/extractMapping'
 import express from 'express'
+import extractMapping from '../middleware/extractMapping'
 
 import integrationController from '../controller/integration'
 import componentsController from '../controller/components'

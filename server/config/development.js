@@ -23,7 +23,10 @@ const injectDevelopmentTools = (app) => {
   }))
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    serverSideRender: true
+    serverSideRender: true,
+    headers: {
+      'Cache-Control': 'max-age=36000'
+    }
   }))
   return '本地开发链接webpack与node服务'
 }
