@@ -3,7 +3,7 @@
 import express from 'express'
 import React from 'react'
 import {toSream, setResHeaders} from '../react'
-import Skeleton from '../react/skeleton'
+import Skeleton from '../views/skeleton'
 import mapReactAssets from '../utils/mapReactAssets'
 import {StaticRouter} from 'react-router'
 import {Provider} from 'react-redux'

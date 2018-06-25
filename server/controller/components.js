@@ -4,7 +4,7 @@ import React from 'react'
 import {toSream, setResHeaders} from '../react'
 import mapReactAssets from '../utils/mapReactAssets'
 import Component from '../../client/pages/example/App'
-import Skeleton from '../react/skeleton'
+import Skeleton from '../views/skeleton'
 import {StaticRouter} from 'react-router'
 import express from 'express'
 const router = express.Router()

@@ -4,7 +4,7 @@
 const switchStatus = function () {
   const {match} = this.props;
   let targetLink = document.querySelector(`.flag${match.path.replace(/\//g, '-')}`);
-  let allLink = [ ...document.querySelectorAll('.sider .top-component')];
+  let allLink = [...document.querySelectorAll('.sider .top-component')];
   allLink.map((link, index) => {
     link.classList.remove('active');
   })

@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "start": "nodemon ./bin/www",
-    "prebuild": "rimraf ./dist && babel bin --out-dir dist/bin && cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "prebuild": "rimraf ./dist && babel bin --out-dir dist/bin --copy-files && cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.babel.js",
     "postbuild": "babel public --out-dir dist/public --copy-files && babel test --out-dir dist/test --copy-files"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "helmet": "^3.12.1",
     "history": "^4.7.2",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",

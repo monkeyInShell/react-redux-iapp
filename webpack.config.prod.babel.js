@@ -32,8 +32,7 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new ExtractCssChunks({
-      filename: '[name].[id].css',
-      allChunks: true
+      filename: '[name].[id].css'
     }),
     ...commonConfig.plugins
   ]
