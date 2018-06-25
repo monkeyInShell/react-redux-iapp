@@ -2,10 +2,8 @@
   "name": "middleware",
   "version": "0.0.1",
   "scripts": {
-    "fix": "sh ./eslint.sh",
     "start": "nodemon ./bin/www",
-    "clean": "sh ./clean.sh",
-    "prebuild": "npm run clean && babel bin --out-dir dist/bin &&cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
+    "prebuild": "rimraf ./dist && babel bin --out-dir dist/bin && cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "postbuild": "babel public --out-dir dist/public --copy-files && babel test --out-dir dist/test --copy-files"
   },
@@ -19,6 +17,7 @@
     "babel-plugin-transform-require-ignore": "^0.1.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "config": "^1.30.0",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -44,6 +43,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
     "webpack": "^4.3.0",

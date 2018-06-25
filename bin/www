@@ -1,22 +1,15 @@
 #!/usr/bin/env node
-if (process.env.NODE_ENV === 'local') {
-  //由于运行时不会设置BABEL_ENV = node，单独为node运行时设置插件处理
-  //这里如果统一设置BABEL_ENV = node，导致webpack内babel运行时也会去读取env: node的配置
-  require('babel-register')({
-    'plugins': [
-      [
-        'babel-plugin-transform-require-ignore',
-        {
-          extensions: ['.less']
-        }
-      ],
-      'dynamic-import-node'
-    ]
-  })
-}
+const path = require('path')
+process.env['NODE_CONFIG_DIR'] = path.resolve(__dirname, '../server/config')
+const config = require('config')
+console.log(`读取配置文件${config.env}.js`)
 const app = require('../server/index').default
 const http = require('http')
 const server = http.createServer(app)
-server.listen('8888', '127.0.0.1', () => {
+server.listen(config.port, config.ip)
+server.on('error', (error) => {
+  throw error
+})
+server.on('listening', () => {
   console.log(`启动成功，监听端口：${server.address().port}`)
 })
