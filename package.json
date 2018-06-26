@@ -1,6 +1,7 @@
 {
   "name": "middleware",
   "version": "0.0.1",
+  "keywords": ["react", "node", "express", "redux", "isomorphic", "服务端渲染", "server side render"],
   "scripts": {
     "start": "nodemon ./bin/www",
     "prebuild": "rimraf ./dist && babel bin --out-dir dist/bin --copy-files && cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
