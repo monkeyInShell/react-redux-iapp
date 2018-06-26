@@ -4,7 +4,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "prebuild": "rimraf ./dist && babel bin --out-dir dist/bin --copy-files && cross-env BABEL_ENV=node babel client --out-dir dist/client --copy-files && babel server --out-dir dist/server --copy-files",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.babel.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.babel.js",
     "postbuild": "babel public --out-dir dist/public --copy-files && babel test --out-dir dist/test --copy-files"
   },
   "dependencies": {
@@ -21,19 +21,18 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-babel": "^5.0.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-react": "^7.7.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.10.0",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "helmet": "^3.12.1",
     "history": "^4.7.2",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",
@@ -48,7 +47,10 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.3.0",
     "webpack-cli": "^2.0.13",
-    "webpack-manifest-plugin": "^2.0.0-rc.2"
+    "webpack-manifest-plugin": "^2.0.0-rc.2",
+    "redux-devtools": "^3.4.1",
+    "redux-devtools-dock-monitor": "^1.1.3",
+    "redux-devtools-log-monitor": "^1.4.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
@@ -57,9 +59,6 @@
     "babel-register": "^6.26.0",
     "mocha": "^5.0.5",
     "nodemon": "^1.17.2",
-    "redux-devtools": "^3.4.1",
-    "redux-devtools-dock-monitor": "^1.1.3",
-    "redux-devtools-log-monitor": "^1.4.0",
     "webpack-dev-middleware": "^3.1.0",
     "webpack-dev-server": "^3.1.1",
     "webpack-hot-middleware": "^2.21.2"

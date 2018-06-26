@@ -1,18 +1,26 @@
 /**
  * Created by ink on 2018/4/8.
  */
-import * as actions from '../redux/action'
-import React, {Component} from 'react'
-import connect from '../../tools/connect'
+import React from 'react';
+import PropTypes from 'prop-types';
+import * as actions from '../redux/action';
+import connect from '../../tools/connect';
 
-class Center extends Component {
-  render () {
-    return (<div>{this.props.title}</div>)
-  }
-}
+const Center = (props) => {
+  const { title } = props;
+  return (
+    <div>
+      {title}
+    </div>
+  );
+};
+Center.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
 export default connect({
   title: state => state.center.title,
-  router: state => state.router
+  router: state => state.router,
 }, {
-  actions
-})(Center)
+  actions,
+})(Center);

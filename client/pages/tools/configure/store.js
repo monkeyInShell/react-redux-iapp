@@ -1,10 +1,13 @@
 /**
  * Created by ink on 2018/4/9.
  */
-let configureStore
-if (process.env.NODE_ENV === 'local') {
-  configureStore = require('./store.local')
+import storeLocal from './store.local';
+import storeProd from './store.prod';
+
+let configureStore;
+if (process.env.NODE_ENV === 'development') {
+  configureStore = storeLocal;
 } else {
-  configureStore = require('./store.prod')
+  configureStore = storeProd;
 }
-module.exports = configureStore
+module.exports = configureStore;

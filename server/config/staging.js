@@ -1,6 +1,6 @@
-'use strict';
+
 module.exports = {
   env: 'staging',
   port: '8888',
-  ip: '0.0.0.0'
-}
+  ip: '0.0.0.0',
+};

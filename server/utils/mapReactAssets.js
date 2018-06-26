@@ -1,19 +1,20 @@
-'use strict';
-import React from 'react'
+
+import React from 'react';
+
 const mapReactAssets = (key) => {
-  let mapObj = global.staticAssetsMapping
+  let mapObj = global.staticAssetsMapping;
   if (typeof global.staticAssetsMapping === 'string' && global.staticAssetsMapping) {
-    mapObj = JSON.parse(global.staticAssetsMapping)
+    mapObj = JSON.parse(global.staticAssetsMapping);
   }
-  const value = mapObj[key]
-  const jsMatch = /\.js$/
-  const cssMath = /\.css$/
-  let srcString = ''
+  const value = mapObj[key];
+  const jsMatch = /\.js$/;
+  const cssMath = /\.css$/;
+  let srcString = '';
   if (jsMatch.test(value)) {
-    srcString = <script src={value}></script>
+    srcString = <script src={value} />;
   } else if (cssMath.test(value)) {
-    srcString = <link rel="stylesheet" href={value} />
+    srcString = <link rel="stylesheet" href={value} />;
   }
-  return srcString
-}
-export default mapReactAssets
+  return srcString;
+};
+export default mapReactAssets;

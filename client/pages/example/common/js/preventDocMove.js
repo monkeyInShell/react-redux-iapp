@@ -2,17 +2,14 @@
  * Created by zhouyunkui on 2017/6/23.
  */
 const fnc = function (evt) {
-  if (this.preventDocMove) {
-    evt.preventDefault();
-    return false;
-  }
-}
+  return this.preventDocMove && evt.preventDefault();
+};
 export const preventDocMove = function () {
   // 测试
   document.addEventListener('touchmove', fnc.bind(this), {
-    passive: false
-  })
+    passive: false,
+  });
 };
 export const offPreventDefault = function () {
-  document.removeEventListener('touchmove', fnc)
+  document.removeEventListener('touchmove', fnc);
 };
