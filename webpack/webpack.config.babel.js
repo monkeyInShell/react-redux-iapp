@@ -1,8 +1,14 @@
-const NODE_ENV = process.env.NODE_ENV;
+import devConfig from './webpack.config.dev.babel';
+import prodConfig from './webpack.config.prod.babel';
+
+const { NODE_ENV } = process.env;
+
 let config;
-if (NODE_ENV === 'local') {
-  config = require('./webpack.config.dev.babel');
+if (NODE_ENV === 'development') {
+  console.log('读取webpack.config.dev.babel.js');
+  config = devConfig;
 } else {
-  config = require('./webpack.config.prod.babel');
+  console.log('读取webpack.config.prod.babel.js');
+  config = prodConfig;
 }
 module.exports = config;

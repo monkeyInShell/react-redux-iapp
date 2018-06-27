@@ -11,7 +11,6 @@ const ExtractCssChunks = require('extract-text-webpack-plugin');
 const publicPath = '/mapping/';
 const commonConfig = require('./webpack.config.common.babel');
 
-console.log('读取webpack production');
 const config = {
   mode: 'production',
   devtool: 'source-map',
