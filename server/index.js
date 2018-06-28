@@ -11,6 +11,7 @@ const config = require('config');
 const app = express();
 app.use(helmet());
 console.log((config.injectDevelopmentTools && config.injectDevelopmentTools(app)) || `当前环境 ${process.env.NODE_ENV}`);
+app.use(main); // 路由入口
 const options = {
   dotfiles: 'ignore',
   etag: true,
@@ -20,7 +21,7 @@ const options = {
   redirect: false,
 };
 app.use(express.static(path.resolve(__dirname, '../public'), options));
-app.use('/', main);
+
 /* eslint-disable */
 app.use((err, req, res, next) => {
   res.json({
